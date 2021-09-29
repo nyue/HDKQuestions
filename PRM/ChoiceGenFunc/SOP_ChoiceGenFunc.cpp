@@ -62,7 +62,7 @@ int SOP_ChoiceGenFunc::choiceCallbackFunc(void *data, int index, fpreal t, const
 
 PRM_Template
 SOP_ChoiceGenFunc::myTemplateList[] = {
-		PRM_Template(PRM_ORD, 1, &choiceName, 0, &generatedBitDepthMenu, 0, &SOP_ChoiceGenFunc::choiceCallbackFunc),
+		PRM_Template(PRM_STRING, 1, &choiceName, 0, &generatedBitDepthMenu, 0, &SOP_ChoiceGenFunc::choiceCallbackFunc),
 		PRM_Template(),
 };
 
