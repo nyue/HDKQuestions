@@ -7,6 +7,7 @@
 #include <UT/UT_Interrupt.h>
 #include <UT/UT_Ramp.h>
 #include <SYS/SYS_Math.h>
+#include <OP/OP_AutoLockInputs.h>
 #include <hboost/format.hpp>
 
 void
@@ -97,10 +98,26 @@ OP_ERROR SOP_ChoiceGenFunc::cookMySop(OP_Context &context)
 	printf("SOP_ChoiceGenFunc::cookMySop()\n");
 
 	_choices.clear();
+	size_t _choice_index=0;
 
-	_choices.insert(ChoiceMapType::value_type(0,"Choice 0"));
-	_choices.insert(ChoiceMapType::value_type(1,"Choice 1"));
-	_choices.insert(ChoiceMapType::value_type(2,"Choice 2"));
+	OP_AutoLockInputs inputs(this);
+	if (inputs.lock(context) >= UT_ERROR_ABORT)
+		return error();
+
+	fpreal now = context.getTime();
+
+	duplicateSource(0, context);
+
+	setCurGdh(0, myGdpHandle);
+
+	const GA_AttributeDict &attribDict = gdp->getAttributeDict(GA_ATTRIB_POINT);
+	for (GA_AttributeDict::iterator iter = attribDict.begin();
+			iter!=attribDict.end();
+			++iter,_choice_index++)
+	{
+		GA_Attribute *detail_attrib = iter.attrib();
+		_choices.insert(ChoiceMapType::value_type(_choice_index,detail_attrib->getName().c_str()));
+	}
 
 	return error();
 }
