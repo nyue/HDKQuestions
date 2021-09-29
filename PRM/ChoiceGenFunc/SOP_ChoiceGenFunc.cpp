@@ -28,32 +28,18 @@ SOP_ChoiceGenFunc::choiceMenuBuilder(void *data, PRM_Name *theMenu, int theMaxSi
 	printf("SOP_ChoiceGenFunc::choiceMenuBuilder()\n");
 	{
 		SOP_ChoiceGenFunc* sop = reinterpret_cast<SOP_ChoiceGenFunc*>(data);
-		if( sop )
+		int index=0;
+		if (sop)
 		{
-			int index=0;
-
-			theMenu[index].setToken("auto");
-			theMenu[index].setLabel("Auto Detect");
-			index++;
-			theMenu[index].setToken("fp16");
-			theMenu[index].setLabel("16bit Float");
-			index++;
-			theMenu[index].setToken("fp32");
-			theMenu[index].setLabel("Float");
-			index++;
-			theMenu[index].setToken("fp64");
-			theMenu[index].setLabel("Double");
-			index++;
-
-			theMenu[index].setToken(0);
-			theMenu[index].setLabel(0);
-
+			for (ChoiceMapType::const_iterator iter = sop->choiceMap().begin();
+					iter != sop->choiceMap().end();
+					++iter,index++)
+			{
+				theMenu[index].setToken(iter->second.c_str());
+				theMenu[index].setLabel(iter->second.c_str());
+			}
 		}
-		else
-		{
-			theMenu[0].setToken(0);
-			theMenu[0].setLabel(0);
-		}
+		theMenu[index].setToken(0); // Terminator
 	}
 }
 
@@ -78,6 +64,11 @@ SOP_ChoiceGenFunc::myTemplateList[] = {
 		PRM_Template(PRM_ORD, 1, &choiceName, 0, &generatedBitDepthMenu, 0, &SOP_ChoiceGenFunc::choiceCallbackFunc),
 		PRM_Template(),
 };
+
+const SOP_ChoiceGenFunc::ChoiceMapType& SOP_ChoiceGenFunc::choiceMap() const
+{
+	return _choices;
+}
 
 OP_Node *
 SOP_ChoiceGenFunc::myConstructor(OP_Network *net, const char *name, OP_Operator *op)
@@ -104,5 +95,12 @@ void SOP_ChoiceGenFunc::helloWorld() const
 OP_ERROR SOP_ChoiceGenFunc::cookMySop(OP_Context &context)
 {
 	printf("SOP_ChoiceGenFunc::cookMySop()\n");
+
+	_choices.clear();
+
+	_choices.insert(ChoiceMapType::value_type(0,"Choice 0"));
+	_choices.insert(ChoiceMapType::value_type(1,"Choice 1"));
+	_choices.insert(ChoiceMapType::value_type(2,"Choice 2"));
+
 	return error();
 }
