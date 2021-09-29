@@ -25,6 +25,7 @@ newSopOperator(OP_OperatorTable *table)
 void
 SOP_ChoiceGenFunc::choiceMenuBuilder(void *data, PRM_Name *theMenu, int theMaxSize, const PRM_SpareData *, PRM_Parm *)
 {
+	printf("SOP_ChoiceGenFunc::choiceMenuBuilder()\n");
 	{
 		SOP_ChoiceGenFunc* sop = reinterpret_cast<SOP_ChoiceGenFunc*>(data);
 		if( sop )
@@ -61,12 +62,15 @@ static PRM_Name choiceName("choices", "My Choices");
 
 int SOP_ChoiceGenFunc::choiceCallbackFunc(void *data, int index, fpreal t, const PRM_Template *tplate)
 {
+	printf("SOP_ChoiceGenFunc::choiceCallbackFunc()\n");
+	/*
 	SOP_ChoiceGenFunc* ptr = reinterpret_cast<SOP_ChoiceGenFunc*>(data);
 	if (ptr)
 		ptr->helloWorld();
+		*/
 	printf("index = %d\n",index);
 	printf("t = %f\n",t);
-	return 0;
+	return 0; // Return 1 to refresh the UI ?
 }
 
 PRM_Template
