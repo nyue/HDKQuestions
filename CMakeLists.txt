@@ -10,3 +10,4 @@ include_directories(
 
 add_subdirectory(PRM)
 add_subdirectory(VEX)
+add_subdirectory(CVEX)
