@@ -1,5 +1,10 @@
 #include "SOP_ChoiceGenFunc.h"
 
+// This is an automatically generated header file based on theDsFile, below,
+// to provide SOP_StarParms, an easy way to access parameter values from
+// SOP_StarVerb::cook with the correct type.
+#include "SOP_ChoiceGenFunc.proto.h"
+
 #include <OP/OP_OperatorTable.h>
 #include <PRM/PRM_Include.h>
 #include <PRM/PRM_SpareData.h>
