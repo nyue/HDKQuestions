@@ -17,12 +17,17 @@
 	    }
         },
         {
-	    "name": "rocky9-debug",
+	    "name": "rocky9-h210-debug",
 	    "displayName": "Rocky Linux 9 Debug Config",
 	    "description": "Rocky Linux 9 debug build using Ninja generator",
 	    "inherits": "debug",
 	    "generator": "Ninja",
 	    "binaryDir": "${sourceDir}/build/rocky9-debug",
+	    "vendor" : {
+                "jetbrains.com/clion": {
+                    "toolchain" : "Houdini210"
+                }
+            },
 	    "environment": {
 	    },
 	    "cacheVariables": {

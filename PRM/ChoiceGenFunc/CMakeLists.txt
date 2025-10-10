@@ -1,19 +1,16 @@
-houdini_generate_proto_headers( OUTPUT_VAR proto_headers
-  FILES SOP_ChoiceGenFunc.cpp )
+set(library_name SOP_ChoiceGenFunc)
 
-message("proto_headers = ${proto_headers}")
+houdini_generate_proto_headers(FILES SOP_ChoiceGenFunc.cpp)
 
-add_library( SOP_ChoiceGenFunc SHARED
-  SOP_ChoiceGenFunc.cpp
-  SOP_ChoiceGenFunc.h
-  )
+add_library(SOP_ChoiceGenFunc SHARED
+        SOP_ChoiceGenFunc.cpp
+        SOP_ChoiceGenFunc.h
+)
 
-target_link_libraries( SOP_ChoiceGenFunc Houdini )
+target_link_libraries(${library_name} Houdini)
 
-target_include_directories(SOP_ChoiceGenFunc PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+target_include_directories(${library_name} PRIVATE
+        ${CMAKE_CURRENT_BINARY_DIR}
+)
 
-install(TARGETS
-  SOP_ChoiceGenFunc
-  DESTINATION
-  dso
-  )
+houdini_configure_target(${library_name})
