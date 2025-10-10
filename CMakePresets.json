@@ -1,0 +1,33 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+	"major": 3,
+	"minor": 25,
+	"patch": 0
+    },
+    "configurePresets": [
+        {
+	    "name": "debug",
+	    "displayName": "Debug Config",
+	    "description": "debug build using Ninja generator",
+	    "generator": "Ninja",
+	    "environment": {
+	    },
+	    "cacheVariables": {
+	    }
+        },
+        {
+	    "name": "rocky9-debug",
+	    "displayName": "Rocky Linux 9 Debug Config",
+	    "description": "Rocky Linux 9 debug build using Ninja generator",
+	    "inherits": "debug",
+	    "generator": "Ninja",
+	    "binaryDir": "${sourceDir}/build/rocky9-debug",
+	    "environment": {
+	    },
+	    "cacheVariables": {
+		"Houdini_DIR":"$env{HT}/cmake"
+	    }
+        }
+    ]
+}

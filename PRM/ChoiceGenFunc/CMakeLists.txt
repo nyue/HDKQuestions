@@ -10,6 +10,8 @@ add_library( SOP_ChoiceGenFunc SHARED
 
 target_link_libraries( SOP_ChoiceGenFunc Houdini )
 
+target_include_directories(SOP_ChoiceGenFunc PRIVATE ${CMAKE_CURRENT_BINARY_DIR})
+
 install(TARGETS
   SOP_ChoiceGenFunc
   DESTINATION

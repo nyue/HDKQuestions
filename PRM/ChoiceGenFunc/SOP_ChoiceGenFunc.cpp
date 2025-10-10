@@ -15,6 +15,9 @@
 #include <OP/OP_AutoLockInputs.h>
 #include <hboost/format.hpp>
 
+static const char* theDsFile = R"THEDSFILE(
+)THEDSFILE";
+
 void
 newSopOperator(OP_OperatorTable *table)
 {
