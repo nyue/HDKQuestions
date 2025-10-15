@@ -14,6 +14,7 @@
 #include <SYS/SYS_Math.h>
 #include <OP/OP_AutoLockInputs.h>
 #include <hboost/format.hpp>
+#include <UT/UT_DSOVersion.h>
 
 static const char* theDsFile = R"THEDSFILE(
 )THEDSFILE";
